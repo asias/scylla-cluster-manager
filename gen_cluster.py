@@ -63,7 +63,7 @@ def gen_cmds(cluster_name, user, nodes_info):
         node_name = f"cmd.scylla.{ip}"
         msg = f"Created: node_name={node_name}, public_ip={ip}, private_ip={ip_internal}, dc={dc}, rack={rack}, directory={directory}, seed={seed}, num_tokens={num_tokens}, shards={shards}, mem={mem}"
         msgs.append(msg)
-        with open(node_name, 'w') as out:
+        with open(node_name, 'w', newline='\n') as out:
             cmd = gen_cmd(node=node_name, cluster_name=cluster_name, user=user, ip=ip, ip_internal=ip_internal, seed=ip, directory=directory, num_tokens=num_tokens, dc=dc, rack=rack, prefer_local=prefer_local, shards=shards, mem=mem, fastboot=True)
             cmd = out.write(cmd)
 

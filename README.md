@@ -2,7 +2,15 @@
 $ python3 scylla.py
 
 # Install runtime dependency
-$ sudo dnf install -y python3-pyside2
+On Linux:
+
+$ sudo dnf install -y python3-pyside2 python3-requests
+
+On Windows:
+
+Install python3
+
+$ pip install pyside2 requests
 
 # Install development dependencies
 $ sudo dnf install -y qt5-qtbase-devel python3-pyside2-devel qt5-qttools-devel
@@ -15,7 +23,7 @@ $ uic-qt5 scylla.ui -o scylla_gui.py -g python
 
 # NOTES
 - Development is only tested on Fedora 33.
-- It is tested to run on Fedora 31 and 33.
+- It is tested to run on Fedora 31 and Fedora 33 and Windows 10.
 - By default, this tool starts 3 nodes locally.
 - Kill the cluster before clicking the deploy again.
   For example:

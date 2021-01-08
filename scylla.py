@@ -146,6 +146,9 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
             cmd = self.get_scp(ssh_user, ip, ssh_key, f"cmd.scylla.{ip}", directory)
             self.run_cmd(cmd)
 
+            cmd = self.get_ssh(ssh_user, ip, ssh_key, f"chmod +x {directory}/cmd.scylla.{ip}")
+            self.run_cmd(cmd)
+
         self.log("=== Step 3: Depoly the first node in the cluster ===")
         for info in self.nodes[0:1]:
             ip = info[0]
