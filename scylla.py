@@ -234,6 +234,9 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
         self.node_table.setColumnCount(len(headers))
         self.node_table.setHorizontalHeaderLabels(headers)
         self.node_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # Display all content of two columns
+        self.node_table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeToContents)
+        self.node_table.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeToContents)
         self.node_table.verticalHeader().setSectionResizeMode(QHeaderView.Fixed)
         self.node_table.verticalHeader().setDefaultSectionSize(_DEFAULT_HEADER_SIZE_)
         row = 0
