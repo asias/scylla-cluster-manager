@@ -201,7 +201,7 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
         self.cluster_table.verticalHeader().setSectionResizeMode(QHeaderView.Fixed)
         self.cluster_table.verticalHeader().setDefaultSectionSize(_DEFAULT_HEADER_SIZE_)
 
-        apps = [["MyScyllaCluster", "asias", "~/.ssh/id_rsa"]]
+        apps = [["MyScyllaCluster", os.getenv('USER', 'asias'), "~/.ssh/id_rsa"]]
         row = 0
         for app in apps:
             col = 0
