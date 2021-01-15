@@ -202,7 +202,6 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
         self.cluster_table.verticalHeader().setDefaultSectionSize(_DEFAULT_HEADER_SIZE_)
 
         apps = [["MyScyllaCluster", "asias", "~/.ssh/id_rsa"]]
-        #apps = [["MyScyllaCluster", "ubuntu", "~/.ssh/hj-seoul.pem.txt"]]
         row = 0
         for app in apps:
             col = 0
