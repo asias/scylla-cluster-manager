@@ -63,7 +63,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.label_3)
 
-        self.log_table = QTextEdit(self.centralwidget)
+        self.log_table = QTextEdit(self.centralwidget, readOnly=True)
         self.log_table.setObjectName(u"log_table")
 
         self.verticalLayout.addWidget(self.log_table)
