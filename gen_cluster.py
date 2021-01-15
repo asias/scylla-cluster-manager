@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import os
+from utils import *
+
 
 def gen_cmd(node, cluster_name, user, ip, ip_internal, seed, directory, num_tokens, dc, rack, prefer_local, shards, mem, fastboot):
     if fastboot:
@@ -60,7 +62,7 @@ def gen_cmds(cluster_name, user, nodes_info):
         num_tokens = info[6]
         shards = info[7]
         mem = info[8]
-        node_name = f"cmd.scylla.{ip}"
+        node_name = f"{CMD_FILE_PREFIX}.{ip}"
         msg = f"Created: node_name={node_name}, public_ip={ip}, private_ip={ip_internal}, dc={dc}, rack={rack}, directory={directory}, seed={seed}, num_tokens={num_tokens}, shards={shards}, mem={mem}"
         msgs.append(msg)
         with open(node_name, 'w', newline='\n') as out:

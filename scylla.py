@@ -12,8 +12,10 @@ import gen_cluster
 import scylla_tools
 import subprocess
 import signal
+from utils import *
 
 _VERSION_ = '2021.01'
+
 
 class MySig(QObject):
     log = Signal(str)
@@ -144,17 +146,17 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
             cmd = self.get_ssh(ssh_user, ip, ssh_key, f"{directory}/scylla/install.sh --nonroot")
             self.run_cmd(cmd)
 
-            cmd = self.get_scp(ssh_user, ip, ssh_key, f"cmd.scylla.{ip}", directory)
+            cmd = self.get_scp(ssh_user, ip, ssh_key, f"{CMD_FILE_PREFIX}.{ip}", directory)
             self.run_cmd(cmd)
 
-            cmd = self.get_ssh(ssh_user, ip, ssh_key, f"chmod +x {directory}/cmd.scylla.{ip}")
+            cmd = self.get_ssh(ssh_user, ip, ssh_key, f"chmod +x {directory}/{CMD_FILE_PREFIX}.{ip}")
             self.run_cmd(cmd)
 
         self.log("=== Step 3: Depoly the first node in the cluster ===")
         for info in self.nodes[0:1]:
             ip = info[0]
             directory = info[4]
-            node_name = f"cmd.scylla.{ip}"
+            node_name = f"{CMD_FILE_PREFIX}.{ip}"
             cmd = self.get_ssh(ssh_user, ip, ssh_key, f"{directory}/{node_name}")
             self.run_cmd(cmd)
 
@@ -163,7 +165,7 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
         for info in self.nodes[1:]:
             ip = info[0]
             directory = info[4]
-            node_name = f"cmd.scylla.{ip}"
+            node_name = f"{CMD_FILE_PREFIX}.{ip}"
             cmd = self.get_ssh(ssh_user, ip, ssh_key, f"{directory}/{node_name}")
             self.log(cmd)
             p = subprocess.Popen(cmd, shell=True)
