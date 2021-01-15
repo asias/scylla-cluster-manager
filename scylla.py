@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 from PySide2.QtCore import *
 from PySide2.QtGui import *
