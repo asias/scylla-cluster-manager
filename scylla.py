@@ -11,6 +11,7 @@ import scylla_gui
 import gen_cluster
 import scylla_tools
 import subprocess
+import signal
 
 _VERSION_ = '2021.01'
 
@@ -245,6 +246,7 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
 
 
 if __name__ == '__main__':
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = QApplication(sys.argv)
     w = MyMainWindow(app)
     w.show()
