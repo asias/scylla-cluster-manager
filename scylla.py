@@ -78,8 +78,22 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
         self.show_node_table()
 
     def delnode_button_callback(self):
-        if self.nodes:
+        if not self.nodes:
+            QMessageBox.warning(self, 'Warning', 'There is no node can be deleted')
+            return
+        selected_rows = []
+        for item in self.node_table.selectedItems():
+            selected_rows.append(item.row())
+        selected_rows = list(set(selected_rows))
+
+        # delete last item if no item is selected
+        if len(selected_rows) == 0:
             self.nodes.pop(-1)
+
+        # delete the selected items
+        for i in sorted(selected_rows, reverse=True):
+            self.nodes.pop(i)
+
         self.show_node_table()
 
     def gen_button_callback(self):
