@@ -12,6 +12,7 @@ import gen_cluster
 import scylla_tools
 import subprocess
 import signal
+import requests
 from utils import *
 
 _VERSION_ = '2021.01'
@@ -52,6 +53,8 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
         self.sig = MySig()
         self.sig.log.connect(self.log_table.append)
         self.display_logo()
+        for i in scylla_package_list.keys():
+            self.scylla_list.addItem(i)
 
     def display_logo(self):
         pixmap = QPixmap('./scylla.png')
@@ -151,7 +154,12 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
             cmd = self.get_ssh(ssh_user, ip, ssh_key, f"mkdir -p {directory}")
             self.run_cmd(cmd)
 
-            cmd = self.get_scp(ssh_user, ip, ssh_key, tarball, directory)
+            pkg_idx = self.scylla_list.currentIndex()
+            if pkg_idx == 0:  # 'Local ./scylla-package.tar.gz'
+                cmd = self.get_scp(ssh_user, ip, ssh_key, tarball, directory)
+            else:
+                scylla_url = list(scylla_package_list.values())[pkg_idx]
+                cmd = self.get_ssh(ssh_user, ip, ssh_key, f'curl -o {directory}/scylla-package.tar.gz {scylla_url}')
             self.run_cmd(cmd)
 
             cmd = self.get_ssh(ssh_user, ip, ssh_key, f"tar xf {directory}/{tarball} -C {directory}")

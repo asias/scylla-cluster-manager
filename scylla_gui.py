@@ -46,6 +46,18 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.cluster_table)
 
+        self.label_4 = QLabel(self.centralwidget)
+        self.label_4.setObjectName(u"label_4")
+
+        self.verticalLayout.addWidget(self.label_4)
+
+        self.scylla_list = QComboBox(self.centralwidget)
+        self.scylla_list.setObjectName(u"scylla_list")
+        sizePolicy.setHeightForWidth(self.scylla_list.sizePolicy().hasHeightForWidth())
+        self.scylla_list.setSizePolicy(sizePolicy)
+
+        self.verticalLayout.addWidget(self.scylla_list)
+
         self.label_2 = QLabel(self.centralwidget)
         self.label_2.setObjectName(u"label_2")
 
@@ -63,8 +75,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.label_3)
 
-        self.log_table = QTextEdit(self.centralwidget, readOnly=True)
+        self.log_table = QTextEdit(self.centralwidget)
         self.log_table.setObjectName(u"log_table")
+        self.log_table.setReadOnly(True)
 
         self.verticalLayout.addWidget(self.log_table)
 
@@ -127,6 +140,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.logo.setText("")
         self.label.setText(QCoreApplication.translate("MainWindow", u"Cluster Config:", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Scylla Version:", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Nodes Config:", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Logs:", None))
         self.addnode_button.setText(QCoreApplication.translate("MainWindow", u"Add Node", None))
