@@ -55,6 +55,11 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
         self.display_logo()
         for i in scylla_package_list.keys():
             self.scylla_list.addItem(i)
+        self.manage_show_nodes()
+
+    def manage_show_nodes(self):
+        for node in self.nodes:
+            self.manage_select_node.addItem("Node: " + node[0])
 
     def display_logo(self):
         pixmap = QPixmap('./scylla.png')
