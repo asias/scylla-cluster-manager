@@ -151,6 +151,12 @@ class MyMainWindow(QMainWindow, scylla_gui.Ui_MainWindow):
             self.log(msg)
 
         self.log("=== Step 2: Copy scylla-package.tar.gz ===")
+        # Prepare the SSH authorized key firstly
+        for info in self.nodes:
+            ip = info[0]
+            cmd = f"ssh-copy-id -i {ssh_key} -o StrictHostKeyChecking=no {ssh_user}@{ip}"
+            self.run_cmd(cmd)
+
         for info in self.nodes:
             ip = info[0]
             directory = info[4]
